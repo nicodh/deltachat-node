@@ -36,6 +36,10 @@ install:
 
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run start-test-server; else true; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ldd build/Release/deltachat.node; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then readelf -a build/Release/deltachat.node; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L build/Release/deltachat.node; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -l build/Release/deltachat.node; fi
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm test; fi

@@ -10,6 +10,8 @@
     "stop-test-server": "./scripts/stop-test-server",
     "generate-constants": "./scripts/generate-constants.js",
     "test": "standard && npm run dependency-check && nyc node test/index.js",
+    "test-configure": "rm -rf db.sqlite* && node test/configure.js",
+    "test-electron": "rm -rf db.sqlite* && electron test/configure.js",
     "test-open": "node test/open.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coverage-html-report": "rm -rf coverage/ && nyc report --reporter=html && opn coverage/index.html",
@@ -36,6 +38,7 @@
   "devDependencies": {
     "coveralls": "^3.0.2",
     "dependency-check": "^3.2.0",
+    "electron": "^2.0.13",
     "nyc": "^12.0.2",
     "opn-cli": "^3.1.0",
     "split2": "^3.0.0",

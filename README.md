@@ -25,7 +25,7 @@
 * [Usage](#usage)
 * [API](#api)
 * [Developing](#developing)
-* [Prebuilt Binaries](#prebuilt-binaries)
+* [Build](#build)
 * [Tests and Coverage](#tests-and-coverage)
 * [Scripts](#scripts)
 * [License](#license)
@@ -899,7 +899,17 @@ npm run submodule
 npm install
 ```
 
-## Prebuilt Binaries
+## Build
+
+We use docker to build the bindings. You can build them locally yourself by doing:
+
+```
+$ cd builder/
+$ make image
+$ make bindings
+```
+
+### Prebuilt Binaries
 
 At time of writing we use `Jenkins` to generate prebuilt binaries, which currently only covers the Linux platform. The workflow for building and releasing them is as follows:
 
@@ -914,21 +924,19 @@ At time of writing we use `Jenkins` to generate prebuilt binaries, which current
 
 ## Tests and Coverage
 
-To run the tests you need to set the `DC_ADDR` and `DC_MAIL_PW` environment variables. E.g.:
+Running `npm test` ends with showing a code coverage report, which is produced by [`nyc`](https://github.com/istanbuljs/nyc#readme).
+
+To run the integration tests you need to set the `DC_ADDR` and `DC_MAIL_PW` environment variables. E.g.:
 
 ```
 $ export DC_ADDR=user@site.org
 $ export DC_MAIL_PW=myp4ssw0rD
-$ npm test
+$ node test/integration
 ```
-
-Running `npm test` ends with showing a code coverage report, which is produced by [`nyc`](https://github.com/istanbuljs/nyc#readme).
 
 ![test output](images/tests.png)
 
 The coverage report from `nyc` in the console is rather limited. To get a more detailed coverage report you can run `npm run coverage-html-report`. This will produce a html report from the `nyc` data and display it in a browser on your local machine.
-
-On `Travis` the coverage report is also passed to [`coveralls`](https://coveralls.io/github/deltachat/deltachat-node).
 
 ## Scripts
 
